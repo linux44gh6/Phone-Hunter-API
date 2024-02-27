@@ -1,5 +1,5 @@
-const loadePhone=async()=>{
-    const res=await fetch('https://openapi.programming-hero.com/api/phones?search=iphone')
+const loadePhone=async(searchText)=>{
+    const res=await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     const data=await res.json()
    phones=(data.data)
 //    console.log(phones)
@@ -7,7 +7,23 @@ const loadePhone=async()=>{
 }
 
 const  displayPhone=(phones)=>{
+  const phoneLen=phones.length;
     const phoneContainer=document.getElementById('phone-container');
+    phoneContainer.textContent='';
+
+    
+    //show the if the data length bigger then 10
+    const showALL=document.getElementById('sholl-all-btn')
+    if(phoneLen>10){
+      showALL.classList.remove('hidden')
+    }else{
+      showALL.classList.add('hidden')
+    }
+
+    //slice the data so that the data not showing over 10
+   phones= phones.slice(0,10)
+
+
     phones.forEach(phone => {
         console.log(phone)
         const phoneCard=document.createElement('div')
@@ -26,4 +42,12 @@ const  displayPhone=(phones)=>{
         phoneContainer.appendChild(phoneCard)
     });
 }
-loadePhone()
+
+function searchItem(){
+  const searchField=document.getElementById('search-field')
+  const searchText=searchField.value;
+  loadePhone(searchText)
+ 
+}
+
+// loadePhone()
