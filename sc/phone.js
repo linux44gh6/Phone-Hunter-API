@@ -4,6 +4,7 @@ const loadePhone=async(searchText)=>{
    phones=(data.data)
 //    console.log(phones)
    displayPhone(phones)
+   toggleSpiner(false)
 }
 
 const  displayPhone=(phones)=>{
@@ -11,7 +12,7 @@ const  displayPhone=(phones)=>{
     const phoneContainer=document.getElementById('phone-container');
     phoneContainer.textContent='';
 
-    
+
     //show the if the data length bigger then 10
     const showALL=document.getElementById('sholl-all-btn')
     if(phoneLen>10){
@@ -40,14 +41,29 @@ const  displayPhone=(phones)=>{
         
         `;
         phoneContainer.appendChild(phoneCard)
+        // toggleSpiner(false)
     });
 }
 
+// after click on the button the data will be show
 function searchItem(){
+  // toggleSpiner()
   const searchField=document.getElementById('search-field')
   const searchText=searchField.value;
   loadePhone(searchText)
+  toggleSpiner(true)
  
+}
+
+// function for show the spiner after click on the button
+
+const toggleSpiner=(isTrue)=>{
+  const spinerDiv=document.getElementById('sppiner')
+ if(isTrue){
+  spinerDiv.classList.remove('hidden')
+ }else{
+  spinerDiv.classList.add('hidden')
+ }
 }
 
 // loadePhone()
