@@ -1,4 +1,4 @@
-const loadePhone=async(searchText)=>{
+const loadePhone=async(searchText='iphone')=>{
     const res=await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     const data=await res.json()
    phones=(data.data)
@@ -26,7 +26,7 @@ const  displayPhone=(phones)=>{
 
 
     phones.forEach(phone => {
-        console.log(phone)
+        // console.log(phone)
         const phoneCard=document.createElement('div')
         phoneCard.classList=`card  bg-gray-400 shadow-xl`;
         phoneCard.innerHTML=`
@@ -35,7 +35,7 @@ const  displayPhone=(phones)=>{
           <h2 class="card-title">${phone.slug}</h2>
           <p>If a dog chews shoes whose shoes does he choose?</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary w-full">Buy Now</button>
+            <button onclick="showModal('${phone.slug}');openModal.showModal()" class="btn btn-primary w-full">Show Details</button>
           </div>
         </div>
         
@@ -66,4 +66,24 @@ const toggleSpiner=(isTrue)=>{
  }
 }
 
-// loadePhone()
+
+//show the phone details in the modal
+const showModal=async(id)=>{
+  const res=await fetch (`https://openapi.programming-hero.com/api/phone/${id}`)
+  const data=await res.json()
+  console.log(data.data)
+  showPhoneDetails(data.data)
+}
+
+const showPhoneDetails=(phone)=>{
+  console.log(phone)
+  const showDetailPhoneContainer=document.getElementById('show-details-ophone-container');
+  showDetailPhoneContainer.innerHTML=`
+  <img class="flex justify-center items-center" src="${phone.image}" alt="">
+  <h1 class="font-bold text-lg">${phone.slug}</h1>
+  <p class="font-bold text-lg">${phone.mainFeatures.chipSet}</p>
+  <p class="font-bold text-lg"> storage:${phone.mainFeatures.storage} </p>
+  `
+}
+
+loadePhone()

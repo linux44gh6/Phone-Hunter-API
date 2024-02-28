@@ -18,7 +18,7 @@
             <input id="search-field" type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
             <button onclick="searchItem()" id="search-btn" class="btn btn-accent">Search</button>
 
-            <div id="sppiner" class="text-center mt-40 hidden">
+            <div  id="sppiner" class="text-center mt-40 hidden">
                 <span class="loading loading-spinner loading-lg text-purple-700 "></span>
             </div>
 
@@ -33,6 +33,25 @@
         <div id="sholl-all-btn" class="hidden">
             <button class="btn btn-accent">Show All</button>
         </div>
+<!-- show the modal -->
+        <section>
+            <!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="">open modal</button>
+<dialog id="openModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <div id="show-details-ophone-container">
+
+    </div>
+   
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+        </section>
     </main>
     <footer>
 
